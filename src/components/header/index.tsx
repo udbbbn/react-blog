@@ -18,7 +18,7 @@ export default class Header extends Component<Iprop, {}> {
         return (
             <div className={s.page}>
                 <Row type="flex" justify="space-between" className={s.nav + ' flex-none-c'}>
-                    <Col span={3} className={s.title}>Son Goku</Col>
+                    <Col span={4} className={s.title}>hello World</Col>
                     <Col span={8}>
                         <Router history={history()}>
                             <Breadcrumb separator=" ">
@@ -26,10 +26,11 @@ export default class Header extends Component<Iprop, {}> {
                                     <Link to='/blogList'>主页</Link>
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Item>
-                                    <Link to='/test'>test</Link>
+                                    <Link to='/classification'>分类</Link>
                                 </Breadcrumb.Item>
-                                <Breadcrumb.Item>主页</Breadcrumb.Item>
-                                <Breadcrumb.Item>主页</Breadcrumb.Item>
+                                <Breadcrumb.Item>
+                                    <Link to='/about'>关于</Link>
+                                </Breadcrumb.Item>
                             </Breadcrumb>
                         </Router>
                     </Col>
