@@ -36,7 +36,8 @@ module.exports = merge(config, {
                             // 是否用css module
                             modules: true,
                             // 支持驼峰
-                            camelCase: true
+                            camelCase: true,
+                            localIdentName: '[name]_[local]-[hash:base64:5]'
                         }
                     },
                     {

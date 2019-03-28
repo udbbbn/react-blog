@@ -8,11 +8,10 @@
         "module": "es2015",
         "target": "es6",
         "jsx": "preserve",
-        "baseUrl": ".",                       /* Base directory to resolve non-absolute module names. */
+        "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
         "paths": {
-            "@": [
-                "src/*"
-            ]
+            "@/*": ["./src/*"],
+            "img/*": ["./src/assets/img/*"],
         },  
     },
     "exclude": [
