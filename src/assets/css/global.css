@@ -7,3 +7,19 @@
     display: flex;
     align-items: center;
 }
+.flex-c-none {
+    display: flex;
+    justify-content: center;
+}
+.flex-column-between {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.two-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
