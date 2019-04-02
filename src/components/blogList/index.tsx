@@ -100,11 +100,11 @@ export default class blogList extends Component {
     return (
       <div>
       <Row>
-        <Col xs={1} sm={1} md={1} lg={1} xl={3}></Col>
-        <Col xs={2} sm={4} md={16} lg={8} xl={10}>
+        <Col xs={1} sm={1} md={1} lg={1} xl={2}></Col>
+        <Col xs={22} sm={22} md={16} lg={16} xl={15}>
           {this.renderList()}
         </Col>
-        <Col xs={1} sm={1} md={6} lg={1} xl={3}>
+        <Col xs={23} sm={23} md={6} lg={6} xl={5}>
           {this.renderUserInfo()}
         </Col>
       </Row>
