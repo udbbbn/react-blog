@@ -14,7 +14,7 @@ const menuClick = ({key} : any) : void => {
 
 const menu = (
     <Menu onClick={menuClick}>
-            <Menu.Item key="blogList">主页
+            <Menu.Item key="/">主页
             </Menu.Item>
             <Menu.Item key="classification">分类
             </Menu.Item>
@@ -41,7 +41,7 @@ export default class Header extends Component<any, {}> {
                         <Router history={history()}>
                             <Breadcrumb separator=" ">
                                 <Breadcrumb.Item>
-                                    <Link to='/blogList'>主页</Link>
+                                    <Link to='/'>主页</Link>
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Item>
                                     <Link to='/classification'>分类</Link>

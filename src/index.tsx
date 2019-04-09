@@ -21,10 +21,10 @@ ReactDOM.render(
     </Layout>
     <Layout>
       <Router history={history()}>
-        <Route path='/' exact component={blogList}></Route>
-        <Route path='/blogList' component={blogList}></Route>
-        <Route path='/classification' component={classification}></Route>
-        <Route path='/about' component={about}></Route>
+        <Route exact path='/'  component={blogList}></Route>
+        <Route exact path='/blogDetail' component={blogList}></Route>
+        <Route exact path='/classification' component={classification}></Route>
+        <Route exact path='/about' component={about}></Route>
       </Router>
     </Layout>
     <Footer></Footer>
