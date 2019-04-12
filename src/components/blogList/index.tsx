@@ -18,10 +18,6 @@ interface I_State {
   showDetail: boolean;
   _id: string,
   blogList: Array<object>,
-  nextDataId: string,  // mongo 使用find+limit分页需要一个id索引
-  prevDataId: string, // 用于上一页
-  listFirstId: string, // 每页第一条id
-  prevPage: number, // 上一个页码
   allCount: number,
   pageSize: number
 }
@@ -50,10 +46,6 @@ export default class blogList extends Component<IProps, I_State> {
     this.state = {
       showDetail: false,
       _id: null,
-      nextDataId: '',
-      prevDataId: '',
-      listFirstId: '',
-      prevPage: 1,
       blogList: [],
       allCount: 10,
       pageSize: 5
@@ -85,7 +77,7 @@ export default class blogList extends Component<IProps, I_State> {
    * @param _id string 当前数据列表最后一条或第一条 用于翻页 
    * @param pageState boolean 判断是上一页还是下一页
    */
-  fetchData(_id = '', page = 0) {
+  fetchData(page = 0) {
     const vm = this;
     request
       .get(`http://127.0.0.1:3000/blogDetail?pageSize=${vm.state.pageSize}&page=${page}`)
@@ -96,8 +88,6 @@ export default class blogList extends Component<IProps, I_State> {
             const data = res.body.data;
             vm.setState({
               blogList: data,
-              listFirstId: data[0]._id,
-              nextDataId: data[data.length - 1]._id,
               allCount: res.body.count
             })
           }
@@ -109,34 +99,7 @@ export default class blogList extends Component<IProps, I_State> {
    * 更换页码
    */
   pageChange = (page: number, pageSize: number) => {
-    // let pageState: boolean; //判断是上一页(false)还是下一页(true)
-
-    // // 如果是非连续页数 如 1 3 5 使用另一种分页方式 详见后端代码
-    // if (this.state.prevPage + 1 != page && this.state.prevPage - 1 != page) {
-    //   if (this.state.prevPage < page) { // 用于区分mongo列表排序方式 怎么这么麻烦!! 不如sql
-    //     pageState = true;
-    //   } else {
-    //     pageState = false;
-    //   }
-    //   this.fetchData('', pageState, 'http://127.0.0.1:3000/blogDetailSkip', page)
-    // } else {
-    //   // 若为连续页码 如 1 2 3 4 
-    //   if (this.state.prevPage < page) { // 下一页
-    //       pageState = true;
-    //       const firstId = this.state.listFirstId;
-    //       this.setState({
-    //         prevDataId: firstId
-    //       })
-    //       this.fetchData(this.state.nextDataId, pageState)
-    //     } else { // 上一页
-    //       pageState = false;
-    //       this.fetchData(this.state.prevDataId, pageState)
-    //     }
-    // }
-    // this.setState({
-    //   prevPage: page
-    // })
-      this.fetchData(this.state.nextDataId, page - 1)
+      this.fetchData(page - 1)
   }
 
   /**
