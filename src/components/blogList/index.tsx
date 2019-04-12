@@ -29,6 +29,7 @@ interface IProps extends FormComponentProps {
 interface I_BlogList {
   title: string,
   fileName: string,
+  _id: string,
   description: string,
   date: string
 }
@@ -122,7 +123,7 @@ export default class blogList extends Component<IProps, I_State> {
             <div
               className={s.blog + " flex-c-c"}
               key={index}
-              data-key={el.fileName}
+              data-key={el._id}
               onClick={this.blogDetail}
             >
               <div>
