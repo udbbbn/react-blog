@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent } from "react";
+import React, { Component, MouseEvent, SyntheticEvent } from "react";
 import * as s from "./index.less";
 import { Row, Col, Icon, Pagination, Input } from "antd";
 import { createHashHistory as history } from "history";
@@ -19,7 +19,12 @@ interface I_State {
   _id: string,
   blogList: Array<object>,
   allCount: number,
-  pageSize: number
+  pageSize: number,
+  currentPage: number,
+  searchList: Array<object>, // 搜索结果
+  search: boolean, // 搜索结果flag
+  searchCount: number, // 搜索结果数量
+  searchCurrent: number // 分页组件搜索时需要重新索引页码
 }
 interface IProps extends FormComponentProps {
   history: History;
@@ -49,8 +54,20 @@ export default class blogList extends Component<IProps, I_State> {
       _id: null,
       blogList: [],
       allCount: 10,
-      pageSize: 5
+      pageSize: 5,
+      currentPage: 1,
+      searchCount: 0,
+      searchList: [],
+      search: false,
+      searchCurrent: 1
     };
+  }
+
+  _state = {
+    ajaxUrl: [
+      'http://127.0.0.1:3000/blogDetail',
+      'http://127.0.0.1:3000/search'
+    ]
   }
 
   componentWillMount() {
@@ -78,19 +95,28 @@ export default class blogList extends Component<IProps, I_State> {
    * @param _id string 当前数据列表最后一条或第一条 用于翻页 
    * @param pageState boolean 判断是上一页还是下一页
    */
-  fetchData(page = 0) {
+  fetchData(page = 0, keyword = '') {
     const vm = this;
+    const url = this.state.search ? this._state.ajaxUrl[1] : this._state.ajaxUrl[0];
     request
-      .get(`http://127.0.0.1:3000/blogDetail?pageSize=${vm.state.pageSize}&page=${page}`)
+      .get(`${url}?pageSize=${vm.state.pageSize}&page=${page}&keyword=${keyword}`)
       .end(function (err, res: any) {
         if (err) {
         } else {
           if (res.body.code === 200) {
             const data = res.body.data;
-            vm.setState({
-              blogList: data,
-              allCount: res.body.count
-            })
+            if (vm.state.search) {
+              vm.setState({
+                searchList: data,
+                searchCurrent: 1,
+                searchCount: res.body.count
+              })
+            } else {
+              vm.setState({
+                blogList: data,
+                allCount: res.body.count
+              })
+            }
           }
         }
       });
@@ -100,6 +126,9 @@ export default class blogList extends Component<IProps, I_State> {
    * 更换页码
    */
   pageChange = (page: number, pageSize: number) => {
+      this.setState({
+        currentPage: page
+      })
       this.fetchData(page - 1)
   }
 
@@ -111,14 +140,49 @@ export default class blogList extends Component<IProps, I_State> {
     history().push("/blogDetail?id=" + key);
   };
 
+  /**
+   * 搜索功能
+   */
+  search = (value: any) => {
+    console.log(value)
+    const vm = this;
+    if (value) {
+      this.setState({
+        search: true
+      }, () => {
+        vm.fetchData(0, value);
+      });
+    } else {
+      this.setState({
+        search: false
+      });
+    }
+  }
+
+  /**
+   * 输入框清空处理
+   */
+  emptySearch = (e: SyntheticEvent) => {
+    if ((e.currentTarget as HTMLInputElement).value.trim() === "") {
+      this.setState({
+        search: false
+      });
+    }
+  }
 
   /**
    * render博客List
    */
   renderList() {
+    let result;
+    if (this.state.search) {
+      result = this.state.searchList;
+    } else {
+      result = this.state.blogList;
+    }
     return (
       <div>
-        {this.state.blogList.map((el: I_BlogList, index) => {
+        {result.map((el: I_BlogList, index) => {
           return (
             <div
               className={s.blog + " flex-c-c"}
@@ -151,8 +215,9 @@ export default class blogList extends Component<IProps, I_State> {
         <Pagination
           className={s.pagination}
           defaultCurrent={1}
+          current={this.state.search ? this.state.searchCount : this.state.currentPage}
           defaultPageSize={this.state.pageSize}
-          total={this.state.allCount}
+          total={this.state.search ? this.state.searchCount : this.state.allCount}
           onChange={this.pageChange}
         />
       </div>
@@ -171,7 +236,7 @@ export default class blogList extends Component<IProps, I_State> {
           className={s.avatar}
         />
         <div className={s.name}>Son Goku</div>
-        <Search placeholder="搜索文章" onSearch={value => console.log(value)} />
+        <Search placeholder="搜索文章" onSearch={this.search} onChange={this.emptySearch} />
       </div>
     );
   }
