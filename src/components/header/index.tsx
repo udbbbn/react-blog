@@ -9,16 +9,16 @@ interface Iprop {
 }
 
 const menuClick = ({key} : any) : void => {
-    history().push(`/${key}`);
+    history().push(`${key}`);
 }
 
 const menu = (
     <Menu onClick={menuClick}>
             <Menu.Item key="/">主页
             </Menu.Item>
-            <Menu.Item key="classification">分类
+            <Menu.Item key="/classification">分类
             </Menu.Item>
-            <Menu.Item key="about">关于
+            <Menu.Item key="/about">关于
             </Menu.Item>
     </Menu>
 );
