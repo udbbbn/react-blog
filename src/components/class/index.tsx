@@ -135,30 +135,6 @@ export default class classification extends Component<I_Props, I_State> {
             {this.renderNavClass()}
             </div>
             <div className={s.content}>
-              {/* <div>
-                <h1 id="js" className={s.title} >js</h1>
-                <ul>
-                  <li><a href="">js</a></li>
-                  <li>3</li>
-                  <li>3</li>
-                </ul>
-              </div>
-              <div>
-                <h1 id="python" className={s.title} >python</h1>
-                <ul>
-                  <li><a href="">python</a></li>
-                  <li>3</li>
-                  <li>3</li>
-                </ul>
-              </div>
-              <div>
-                <h1 id="node" className={s.title} >node</h1>
-                <ul>
-                  <li><a href="">node</a></li>
-                  <li>3</li>
-                  <li>3</li>
-                </ul>
-              </div> */}
               {this.renderCalssDetail()}
             </div>
             </section>
