@@ -84,8 +84,9 @@ export default class classification extends Component<I_Props, I_State> {
         {
           Object.keys(obj).map((el: string, index) => {
             return (
-              <Tag key={index}>
+              <Tag key={index} className={s.mb5px}>
                 <a onClick={() => {this.scrollToItem(`${obj[el].target}`)}} className={s.tag}>{obj[el].target}</a>
+                <span className={s.tip}>{`${obj[el].count}`}</span>
               </Tag>
             )
           })
