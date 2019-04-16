@@ -237,9 +237,17 @@ export default class blogList extends Component<IProps, I_State> {
           className={s.avatar}
         />
         <div className={s.name}>Son Goku</div>
-        <Search placeholder="搜索文章" onSearch={this.search} onChange={this.emptySearch} />
+        {this.renderSearch()}
       </div>
     );
+  }
+
+  renderSearch() {
+    if (!this.state.showDetail) {
+      return (
+        <Search placeholder="搜索文章" onSearch={this.search} onChange={this.emptySearch} />
+      )
+    }
   }
 
   render() {
