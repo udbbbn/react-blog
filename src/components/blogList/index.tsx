@@ -36,7 +36,8 @@ interface I_BlogList {
   fileName: string,
   _id: string,
   description: string,
-  date: string
+  date: string,
+  img: string
 }
 
 const IconText = ({ type, text, key }: I_Icon) => (
@@ -191,7 +192,7 @@ export default class blogList extends Component<IProps, I_State> {
               onClick={this.blogDetail}
             >
               <div>
-                <img className={s.img} src={require("img/bg.jpg")} alt="" />
+                <img className={s.img} src={el.img} alt="" />
               </div>
               <div className={s.content + " flex-column-between"}>
                 <div className={s.title + " two-ellipsis"}>{el.title}
