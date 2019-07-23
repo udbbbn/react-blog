@@ -61,10 +61,6 @@ module.exports = {
                         loader: 'css-loader'
                     },
                 ]
-            },
-            {
-                test: /\.(jpg|png|gif|bmp|jpeg)$/,
-                loader: 'url-loader'
             }
         ]
     },

@@ -45,6 +45,10 @@ module.exports = merge(config, {
                     }
                 ]
             },
+            {
+                test: /\.(jpg|png|gif|bmp|jpeg)$/,
+                loader: 'url-loader'
+            }
         ]
     },
     plugins: [
