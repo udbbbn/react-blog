@@ -18,8 +18,8 @@ const menu = (
             </Menu.Item>
             <Menu.Item key="/classification">分类
             </Menu.Item>
-            <Menu.Item key="/about">关于
-            </Menu.Item>
+            {/* <Menu.Item key="/about">关于
+            </Menu.Item> */}
     </Menu>
 );
 
@@ -46,9 +46,9 @@ export default class Header extends Component<any, {}> {
                                 <Breadcrumb.Item>
                                     <Link to='/classification'>分类</Link>
                                 </Breadcrumb.Item>
-                                <Breadcrumb.Item>
+                                {/* <Breadcrumb.Item>
                                     <Link to='/about'>关于</Link>
-                                </Breadcrumb.Item>
+                                </Breadcrumb.Item> */}
                             </Breadcrumb>
                         </Router>
                     </Col>

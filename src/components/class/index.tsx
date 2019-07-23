@@ -130,7 +130,7 @@ export default class classification extends Component<I_Props, I_State> {
       <div>
         <Row>
           <Col xs={2} sm={2} md={4} lg={4} xl={4}></Col>
-          <Col xs={22} sm={22} md={16} lg={8} xl={10}>
+          <Col xs={22} sm={22} md={20} lg={20} xl={20}>
             <section className={s.wrapper}>
             <div className={s.classWrapper}>
             {this.renderNavClass()}
