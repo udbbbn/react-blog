@@ -1,8 +1,11 @@
-使用react+less+antd+koa+mongo完成一个文章类型为**md**的blog。
+使用`react`+`less`+`antd`完成一个文章类型为**md**的blog。
 
-未完成：
-搜索
+完成功能：
 
-关于页面
+1. 响应式布局
+2. 首页功能
+3. 分类功能
+4. 搜索功能
+5. 内容页的md文件展示
 
-koa解析md文件添加数据到mongo
+项目地址为：[http://udbbbn.cn](http://udbbbn.cn)
